@@ -1,0 +1,138 @@
+:root {
+  --black: #000000;
+  --red: #e50914;
+  --red-dark: #b0060f;
+  --white: #ffffff;
+  --gray: #a3a3a3;
+  --grid-line: rgba(255, 255, 255, 0.06);
+}
+
+.page {
+  --mouse-x: 50vw;
+  --mouse-y: 50vh;
+  --parallax-x: 0;
+  --parallax-y: 0;
+
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  background-color: var(--black);
+  color: var(--white);
+}
+
+.cursor-glow,
+.cursor-grid {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.cursor-glow {
+  background: radial-gradient(
+    520px circle at var(--mouse-x) var(--mouse-y),
+    rgba(229, 9, 20, 0.22),
+    rgba(229, 9, 20, 0.06) 35%,
+    transparent 65%
+  );
+  transition: opacity 0.2s ease;
+}
+
+.cursor-grid {
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(
+    420px circle at var(--mouse-x) var(--mouse-y),
+    black 0%,
+    rgba(0, 0, 0, 0.35) 45%,
+    transparent 70%
+  );
+  -webkit-mask-image: radial-gradient(
+    420px circle at var(--mouse-x) var(--mouse-y),
+    black 0%,
+    rgba(0, 0, 0, 0.35) 45%,
+    transparent 70%
+  );
+}
+
+.header {
+  position: absolute;
+  top: 2rem;
+  left: 1.5rem;
+  z-index: 2;
+}
+
+.logo {
+  height: 56px;
+  width: auto;
+  object-fit: contain;
+}
+
+.hero {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+
+.headline {
+  margin: 0;
+  max-width: 900px;
+  font-size: clamp(2.25rem, 6vw, 4.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  text-transform: lowercase;
+  color: var(--white);
+  text-shadow:
+    0 0 40px rgba(255, 255, 255, 0.35),
+    0 0 80px rgba(229, 9, 20, 0.15);
+  transform: translate(
+    calc(var(--parallax-x) * 14px),
+    calc(var(--parallax-y) * 10px)
+  );
+  transition: transform 0.12s ease-out;
+  will-change: transform;
+}
+
+.headline::after {
+  content: '';
+  display: block;
+  width: 4rem;
+  height: 4px;
+  margin: 2rem auto 0;
+  background: linear-gradient(90deg, transparent, var(--red), transparent);
+  border-radius: 2px;
+}
+
+@media (max-width: 640px) {
+  .logo {
+    height: 44px;
+  }
+
+  .header {
+    top: 1.25rem;
+    left: 1rem;
+  }
+
+  .cursor-glow {
+    background: radial-gradient(
+      360px circle at var(--mouse-x) var(--mouse-y),
+      rgba(229, 9, 20, 0.2),
+      transparent 65%
+    );
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .headline {
+    transform: none;
+    transition: none;
+  }
+}
