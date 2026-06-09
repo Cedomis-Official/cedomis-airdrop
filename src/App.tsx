@@ -42,7 +42,7 @@ function App() {
       </header>
 
       <main className="hero">
-        <h1 className="headline">Stack claim begins soon</h1>
+        <h1 className="headline">Staking begins soon</h1>
       </main>
     </div>
   )
